@@ -23,14 +23,26 @@ Keep the command installation outside the vault so its dependencies are not
 synchronized. From the delivered `outputs/vaultsync` directory:
 
 ```sh
-mkdir -p "$HOME/.local/share/vaultsync"
-cp -R package.json package-lock.json src services test README.md "$HOME/.local/share/vaultsync/"
-cd "$HOME/.local/share/vaultsync"
+VAULTSYNC_INSTALL_DIR="$HOME/.local/share/vaultsync"
+mkdir -p "$VAULTSYNC_INSTALL_DIR" "$HOME/.local/bin"
+# Skip copying when you are already in the installation directory.
+if [ "$(pwd -P)" != "$(cd "$VAULTSYNC_INSTALL_DIR" && pwd -P)" ]; then
+  cp -R package.json package-lock.json src services test README.md "$VAULTSYNC_INSTALL_DIR/"
+fi
+cd "$VAULTSYNC_INSTALL_DIR"
 npm ci --ignore-scripts
-npm link --prefix "$HOME/.local"
+# No npm global link or global-prefix configuration is required.
+ln -s "$VAULTSYNC_INSTALL_DIR/src/cli.js" "$HOME/.local/bin/vaultsync"
 export PATH="$HOME/.local/bin:$PATH"
 vaultsync --help
 ```
+
+If `vaultsync` already exists in `~/.local/bin`, inspect it with
+`ls -l "$HOME/.local/bin/vaultsync"`; an existing link to this same installation
+needs no replacement. Do not overwrite another executable. `cp` reporting
+“identical (not copied)” means you ran the old copy step inside the destination;
+your files are already there. If you previously ran `npm link --prefix` and got
+an error about `~/.local/package.json`, create the command link shown above.
 
 Add that PATH setting to your shell profile. The service uses absolute Node and
 command paths; re-run `install` after moving the installation or upgrading Node.
