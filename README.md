@@ -19,30 +19,43 @@ gh auth login
 gh auth setup-git
 ```
 
-Keep the command installation outside the vault so its dependencies are not
-synchronized. From the delivered `outputs/vaultsync` directory:
+Clone the public **VaultSync application source** into a directory outside your
+Obsidian vault. The example below uses `~/.local/share/vaultsync`; you can choose
+another installation directory. This source repository is separate from the
+private repository that will hold your vault's notes and attachments.
+
+For a new installation, run these commands from any directory:
 
 ```sh
 VAULTSYNC_INSTALL_DIR="$HOME/.local/share/vaultsync"
-mkdir -p "$VAULTSYNC_INSTALL_DIR" "$HOME/.local/bin"
-# Skip copying when you are already in the installation directory.
-if [ "$(pwd -P)" != "$(cd "$VAULTSYNC_INSTALL_DIR" && pwd -P)" ]; then
-  cp -R package.json package-lock.json src services test README.md "$VAULTSYNC_INSTALL_DIR/"
-fi
+mkdir -p "$(dirname "$VAULTSYNC_INSTALL_DIR")" "$HOME/.local/bin"
+git clone https://github.com/gorlev/VaultSync.git "$VAULTSYNC_INSTALL_DIR"
 cd "$VAULTSYNC_INSTALL_DIR"
 npm ci --ignore-scripts
-# No npm global link or global-prefix configuration is required.
 ln -s "$VAULTSYNC_INSTALL_DIR/src/cli.js" "$HOME/.local/bin/vaultsync"
 export PATH="$HOME/.local/bin:$PATH"
 vaultsync --help
 ```
 
-If `vaultsync` already exists in `~/.local/bin`, inspect it with
-`ls -l "$HOME/.local/bin/vaultsync"`; an existing link to this same installation
-needs no replacement. Do not overwrite another executable. `cp` reporting
-“identical (not copied)” means you ran the old copy step inside the destination;
-your files are already there. If you previously ran `npm link --prefix` and got
-an error about `~/.local/package.json`, create the command link shown above.
+`git clone` needs a destination that is absent or empty. If you already have a
+working installation, skip the clone and command-link steps. Do not clone over
+existing files. If a `vaultsync` command already exists, inspect it with
+`ls -l "$HOME/.local/bin/vaultsync"`; a link to this same installation needs no
+replacement. Do not overwrite another executable. No global npm linking or
+prefix configuration is required.
+
+To update an installation originally created with `git clone`, stop its daemon,
+then run:
+
+```sh
+cd "$HOME/.local/share/vaultsync" # Use your installation directory if different.
+git pull --ff-only
+npm ci --ignore-scripts
+vaultsync --help
+```
+
+Restart the daemon after the update. If you previously installed by copying files,
+that directory may not be a Git checkout; these `git pull` steps do not apply to it.
 
 Add that PATH setting to your shell profile. The service uses absolute Node and
 command paths; re-run `install` after moving the installation or upgrading Node.
