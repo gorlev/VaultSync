@@ -1,0 +1,35 @@
+
+> vaultsync@0.1.0 test
+> node --test --test-concurrency=1 test/*.test.js
+
+✔ real SIGKILL during a file update: stale lock and journal recover on daemon restart (9954.83525ms)
+✔ startup pull, five-minute schedule and precise 30-second trailing debounce using controlled clock (13875.060375ms)
+✔ startup dirty vault waits for debounce before pull; offline commits retained and retry on scheduled cycle (8049.95ms)
+✔ rejected push keeps local history, does not force; retries next cycle and keeps last success accurate (8932.506417ms)
+✔ second daemon rejected without disturbing owner status; graceful stop releases lock (4703.180791ms)
+✔ concurrent remote advancement after second pull rejects normal push and recovers on schedule (9390.115625ms)
+✔ two devices: complete conflict bytes, multiple unpushed commits, same-day unique copies (9436.483583ms)
+✔ binary attachments, shared configuration, Unicode/spaces/newlines/tabs/leading dash (7466.802041ms)
+✔ edit/delete in either direction preserves content and logs deletion intent; clean deletion propagates (11261.891459ms)
+✔ rename/rename preserves both destinations; rename/edit preserves both versions (8798.523833ms)
+✔ integration detects new user edits before apply and retries without losing bytes (5100.782625ms)
+✔ edits during application survive rollback; subsequent integration succeeds (6853.58575ms)
+✔ durable journal recovers interrupted application before or after updating HEAD (5150.607666ms)
+✔ manual rebase and unsupported symlink stop without changing live files (2249.453209ms)
+✔ ignored files are removed from tracking but retained locally; status never and discovery (1821.871542ms)
+✔ privacy verification precedes changes; mismatch remote and push overrides refused (1563.453875ms)
+✔ single daemon lock, stale PID recovery, local-date filenames (1063.978417ms)
+✔ text Markdown conflict copies bypass attributes and preserve complete raw bytes (6989.698792ms)
+✔ unsupported directory/file transition stops before any live modification (5282.998375ms)
+✔ external token bridge is noninteractive, host-scoped and never in Git args/config/logs (1598.639083ms)
+✔ launchd/systemd escaping and service install/uninstall preserve vault (1103.395292ms)
+✔ CLI works through a symlink; init connects matching remote and leaves ignored bytes local (2109.658375ms)
+✔ ambient dependency DEBUG cannot leak credentials or raw Git errors (1297.744792ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 134391.321

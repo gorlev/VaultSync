@@ -1,0 +1,16 @@
+{
+  "platform": "darwin",
+  "node": "v24.13.0",
+  "testedAt": "2026-10-01T15:28:35.393Z",
+  "checks": [
+    "plutil lint",
+    "launchctl bootstrap/enable/kickstart/print",
+    "daemon running",
+    "startup isolated-worktree pull applies remote bytes",
+    "real 30-second watched edit committed and pushed to local bare remote",
+    "status success timestamps",
+    "launchctl bootout and service removal"
+  ],
+  "linuxRuntime": "not performed",
+  "githubLive": "not performed (local bare remote only)"
+}

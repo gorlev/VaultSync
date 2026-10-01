@@ -1,0 +1,8 @@
+{
+  "name": "vaultsync", "version": "0.1.0", "private": true, "type": "module",
+  "description": "Preservation-first Git sync for an Obsidian vault",
+  "bin": {"vaultsync": "src/cli.js"},
+  "engines": {"node": ">=24 <25"},
+  "scripts": {"test": "node --test --test-concurrency=1 test/*.test.js", "check": "node --check src/cli.js && node --check src/engine.js"},
+  "dependencies": {"chokidar": "5.0.0", "simple-git": "4.0.2"}
+}

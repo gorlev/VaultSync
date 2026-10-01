@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+<key>Label</key><string>dev.vaultsync.VAULT_ID</string>
+<key>ProgramArguments</key><array><string>NODE_ABSOLUTE_PATH</string><string>CLI_ABSOLUTE_PATH</string><string>run</string><string>--vault</string><string>VAULT_ABSOLUTE_PATH</string></array>
+<key>EnvironmentVariables</key><dict><key>PATH</key><string>NODE_DIRECTORY:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string></dict>
+<key>RunAtLoad</key><true/><key>KeepAlive</key><true/>
+<key>ThrottleInterval</key><integer>30</integer>
+<key>StandardOutPath</key><string>EXTERNAL_STATE_DIRECTORY/service.stdout.log</string>
+<key>StandardErrorPath</key><string>EXTERNAL_STATE_DIRECTORY/service.stderr.log</string>
+</dict></plist>

@@ -1,0 +1,14 @@
+[Unit]
+Description=Git Obsidian vault sync
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStart="NODE_ABSOLUTE_PATH" "CLI_ABSOLUTE_PATH" run --vault "VAULT_ABSOLUTE_PATH"
+Environment="PATH=NODE_DIRECTORY:/usr/local/bin:/usr/bin:/bin"
+Restart=always
+RestartSec=30
+UMask=0077
+
+[Install]
+WantedBy=default.target
