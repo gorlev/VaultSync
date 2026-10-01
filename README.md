@@ -1,12 +1,31 @@
-# vaultsync
+<p align="center">
+  <img src="assets/vaultsync-banner.png" alt="VaultSync — Obsidian vault synchronization with GitHub" width="1000">
+</p>
 
-A small Node 24 command for one Obsidian vault and one private GitHub repository.
-It includes attachments and shared `.obsidian` configuration. Git is the history;
-there is no telemetry, hosted sync backend, or history UI.
+# VaultSync
 
-**Disable Obsidian Sync for this vault before enabling vaultsync.** Back up the
-vault first. GitHub privacy is access control, not end-to-end encryption.
-Encrypted-vault workflows are outside this tool's scope.
+**Your Obsidian vault. Your Git history. Synced across devices.**
+
+VaultSync is a small Node 24 command that syncs one Obsidian vault to one private
+GitHub repository. Notes, attachments, and shared `.obsidian` configuration travel
+together, with automatic commits and background services for macOS and Linux.
+
+[Installation](#install-the-command) · [First machine](#first-machine) ·
+[Second machine](#second-machine) · [Services](#services) ·
+[Conflicts](#conflicts-and-preservation) · [Recovery](#recovery-and-edits-during-integration)
+
+- **Automatic sync** — commits after 30 seconds of inactivity, pulls on startup
+  and every five minutes, and pulls again before pushing.
+- **Preservation and recovery** — integrates in an isolated worktree and preserves
+  conflicting content in separate files, with journals and local recovery copies.
+- **Git you control** — uses your Git credentials and a private repository, with
+  no telemetry, hosted sync backend, or history UI.
+
+> [!IMPORTANT]
+> Disable Obsidian Sync for this vault before enabling VaultSync, and back up the
+> vault first. GitHub privacy is access control, not end-to-end encryption.
+> Encrypted-vault workflows are outside this tool's scope. Read the
+> [validation and limits](#validation-and-limits) before relying on unattended sync.
 
 ## Install the command
 
